@@ -1,38 +1,785 @@
+* 
+{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,body {
+  overflow-x: hidden;
+}
+
+body {
+  
+  font-family: 'Corinthia', cursive;
+  font-family: 'Dancing Script', cursive;
+
+}
+
+
 .App {
-  text-align: center;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: url('../src/files/timeBackground.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f0ecfc;
+  background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
+  mix-blend-mode: multiply;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.wrapperClock {
+  position: relative;
+  width: clamp(25rem, 50%, 30rem);
+  height: 40rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
+             inset -5px -5px 15px rgba(255,255,255,0.1),
+            5px 5px 15px rgba(0,0,0,0.3),
+            -5px -5px 15px rgba(255,255,255,0.1);
+  transition: all 0.5s ease-out;
+}
+
+.wrapperInside {
+  position: absolute;
+  inset: 20px;
+  background-color: #f9fcff;
+  background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+  padding: 12px;
+  z-index: 100;
+  border-radius: 15px;
+  transition: 0.5s ease-in-out;
+  animation: animateIN 1s ease-in-out;
+}
+
+@keyframes  animateIN {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1)
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+.wrapperInside::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(60% at 50% 125%);
+  background-color: rgba(0,0,0,0.01);
+}
+
+header
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoWrapper
+{
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+}
+
+.logoWrapper > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plusWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #EEF0F4;
+  box-shadow: inset 9.91px 9.91px 15px #E8EAEE, inset -9.91px -9.91px 15px #F4F6FA;
+
+}
+
+.clockWrapper
+{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline: auto;
+  margin-block: 30px;
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EEF0F4;
+  border-radius: 50%;
+  box-shadow: inset 9.91px 9.91px 8px #E6E8EB, inset -9.91px -9.91px 8px #F6F8FD;
+  width: 15rem;
+  height: 15rem;
+  animation: animationMove 5s ease-in-out infinite;
+}
+
+.clock::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: lightgray;
+  z-index: 1000;
+}
+
+@keyframes animationMove {
+  0%, 100% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+
+.hour_hand {
+  position: absolute;
+  width: 6px;
+  height: 60px;
+  background-color: #D9AFD9;
+  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+  top: 60px;
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom;
+}
+
+.minute_hand {
+  position: absolute;
+  width: 4px;
+  height: 70px;
+  background-color: #FAACA8;
+  background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+  top: 48px;
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom;
+}
+
+.second_hand {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  background-color: #8BC6EC;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  top: 40px;
+  border-radius: 10px 10px 0 0;
+  transform-origin: bottom;
+}
+
+.clock span {
+  position: absolute;
+  font-family: 'Corinthia', cursive;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+  
+}
+
+.twelve {
+  top: 10px;
+  left: 46%;
+}
+
+.one {
+  top: 10%;
+  right: 26%;
+}
+
+.eleven {
+  top: 10%;
+  left: 26%;
+}
+
+.two {
+  top: 25%;
+  right: 10%;
+}
+
+.three {
+  right: 10px;
+  top: 46%;
+}
+
+.four {
+  right: 30px;
+  top: 67%;
+}
+
+.five {
+  right: 65px;
+  top: 82%;
+}
+
+.six {
+  bottom: 10px;
+  left: 50%;
+}
+
+.seven {
+  left: 80px;
+  top: 82%;
+}
+
+.eight {
+  left: 30px;
+  top: 67%;
+}
+
+.nine {
+  left: 10px;
+  top: 46%;
+}
+
+.ten {
+  top: 25%;
+  left: 10%;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.time h3,
+.time p {
+  display: block;
+  font-weight: 700;
+  font-family: 'Corinthia', cursive;
+  font-family: 'Dancing Script', cursive;
+}
+
+.time p {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.bottomTabs {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  border-radius: 0 0 15px 15px;
+}
+
+
+.wrapperIcon {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #E6E8EB;
+  transition: all 1s ease-out;
+  transform: translateY(12px);
+  cursor: pointer;
+}
+
+.wrapperIcon.active {
+  transition-delay: 0.3s;
+  transform: translateY(-50%);
+}
+
+.iconWrapper {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inset: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.tabWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+}
+
+.iconTitle {
+  display: block;
+  text-align: center;
+  transform: translateY(100%);
+  transition: 0.5s ease-in-out;
+  font-size: 1em;
+  opacity: 0;
+  font-family: 'Corinthia', cursive;
+  font-family: 'Dancing Script', cursive;
+}
+
+.iconTitle.active {
+  transform: translateY(-100%);
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+
+/* Add Alarm Clock */
+
+.alarmSet p {
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #9ab5e1;
+  background-image: linear-gradient(315deg, #9ab5e1 0%, #f39fdc 74%);  
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
+
+.quoteAlarm p {
+  text-align: center;
+  font-size: 1.5rem;
+  background-color: #9ab5e1;
+  background-image: linear-gradient(315deg, #9ab5e1 50%, #f39fdc 74%);  
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  
+}
+
+.alarmsContainer {
+  padding: 0 20px;
+  margin-top: 4rem;
+  height: 26rem;
+  overflow-y: auto;
+}
+
+.alarmsContainer::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.alarmsContainer {
+  -ms-overflow-style: none;  /* 
+  IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+} 
+
+
+.alarmUP {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /*border-top: 1px solid rgba(0,0,0,0.03);*/
+  border-top: 1px solid rgb(241, 228, 238);
+  border-bottom: 1px solid rgb(241, 228, 238);
+  padding: 12px 0;
+}
+
+.alarmNotification span {
+  display: inline;
+  font-weight: 700;
+  background-color: #9ab5e1;
+  background-image: linear-gradient(315deg, #9ab5e1 0%, #f39fdc 74%);  
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.alarmTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alarmTime > h2 {
+  text-shadow: 2px 0px 0px #f39fdc;
+  text-align: center;
+  width: 8rem;
+}
+
+.alarmTime > p {
+  color: #000;
+  opacity: 0.5;
+}
+
+.check {
+  position: relative;
+  display: block;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 50px;
+  background-color: #fefefe;
+  transition: 0.5s ease-out;
+  cursor: pointer;
+  overflow:hidden;
+}
+
+.check::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: lightgray;
+  transition: 0.5s ease-out;
+  box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -webkit-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -moz-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+}
+
+.check::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: lightgray;
+  transition: 0.5s ease-out;
+  transform: translateX(50px);
+  
+}
+
+#checkInput {
+  -webkit-appearance: none;
+  display: none;
+}
+
+
+#checkInput:checked ~ .check {
+  background-color: #f8ceec;
+  background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  box-shadow: 0px 10px 15px #f8ceec;
+}
+
+#checkInput:checked ~ .check::before {
+  transform: translateX(-50px);
+}
+
+#checkInput:checked ~ .check::after {
+  transform: translateX(0);
+  background-color: #fff;
+  box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -webkit-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -moz-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+}
+
+.alarmPopUPActive
+{
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: all 0.8s ease-in-out;
+}
+
+.alarmWrapper
+{
+  display: inline-block;
+  width: 20rem;
+  height: 15rem;
+  background-color: #fefefe;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.alarmWrapper.active {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.alarmPopUPInactive
+{
+  display: none;
+}
+
+.containerClock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.doneButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  bottom: -45px;
+  background-color: #fff;
+  width: 100%;
+  height: 3rem;
 }
 
-.App-link {
-  color: #61dafb;
+.doneButton p {
+  cursor: pointer;
+  background-color: #f39fdc; 
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.checkIcon {
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+}
+
+.checkIcon > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* Stopwatch */
+
+.timerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  gap: 20px;
+  height: 100%;
+}
+
+.timerWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 80%;
+  z-index: -1;
+}
+
+.containerBox {
+  position: absolute;
+  width: 7.5rem;
+  height: 7.5rem;
+  background-color: rgb(0,0,0,0.02);
+}
+
+.container1 {
+  display: grid;
+  place-items: center;
+  bottom: 40%;
+  left: 0;
+  animation: animationContainer1 10s ease-in-out infinite;
+  z-index: -1;
+}
+
+.container1 > img,
+.container2 > img {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  opacity: 0.1;
+}
+
+@keyframes animationContainer1 {
+  0%,100% {
+    transform: translateY(-20px);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    transform: translateY(20px);
   }
 }
+
+.container2 {
+  display: grid;
+  place-items: center;
+  top: 20%;
+  right: 0;
+  animation: animationContainer2 10s ease-in-out infinite;
+}
+
+@keyframes animationContainer2 {
+  0%,100% {
+    transform: translateY(20px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+
+.buttonsTimer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.buttonsTimer > button {
+  display: inline-block;
+  border: none;
+  padding: 5px 0;
+  text-align: center;
+  color: #fff;
+  width: 5rem;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+}
+
+.buttonsTimer > button:nth-child(1) {
+  background-color: #d387ab;
+  background-image: linear-gradient(315deg, #d387ab 0%, #b279a7 74%);
+}
+
+.buttonsTimer > button:nth-child(1):hover {
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
+  color: #d387ab;
+}
+
+.buttonsTimer > button:nth-child(2) {
+  background-color: #9e8fb2;
+  background-image: linear-gradient(315deg, #9e8fb2 0%, #a7acd9 74%);
+}
+
+.buttonsTimer > button:nth-child(2):hover {
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
+  color: #9e8fb2;
+}
+
+.alarmTification {
+  position: absolute;
+  width: 70%;
+  left: 15%;
+  top: 10%;
+  background-color: #f8ceec;
+  background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  color: #fff;
+  padding: 7px 5px;
+  transition: 0.5s ease-out;
+}
+
+.alarmTification.active {
+
+  transform: scale(1);
+  opacity: 1;
+
+}
+
+.alarmTification.inactive {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.alarmTification > p {
+  display: block;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.timerStats > span {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+
+  .alarmTification {
+    top: 9%;
+    left: 15%;
+
+  }
+
+  .alarmTification > p {
+    font-size: 1rem;
+  }
+
+  .alarmSet p,
+  .quoteAlarm p {
+    font-size: 1.3rem;
+  }
+
+  .alarmTime > h2 {
+    font-size: 1.3rem;
+  }
+
+  .containerBox {
+    position: absolute;
+    width: 6.5rem;
+    height: 6.5rem;
+    background-color: rgb(0,0,0,0.02);
+  }
+
+  .container1 {
+    display: grid;
+    place-items: center;
+    bottom: 35%;
+    left: 0;
+    animation: animationContainer1 10s ease-in-out infinite;
+    z-index: -1;
+  }
+
+  .container2 {
+    display: grid;
+    place-items: center;
+    top: 30%;
+    right: 0;
+    animation: animationContainer2 10s ease-in-out infinite;
+  }
+
+}
+
+@media (max-width: 400px) {
+  .alarmTification {
+    top: 11%;
+    left: 17%;
+  }
+}
+
+
