@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import stopWatchIcon1 from './files/stopwatch.png'
 import stopWatchIcon2 from './files/deadline.png'
-import check from './files/check.png'
 import Lottie from 'react-lottie';
 import animationData from './files/clock-animation.json';
 import { dataTabs } from './sampleData/data'
@@ -89,7 +88,7 @@ const ClockTimer = () => {
                         />
                     </div> 
                     <div className = 'alarmSet'>
-                        <p>Stopwatch of your moment!</p>
+                        <p>Stopwatch for your moment!</p>
                     </div>
                     <div></div>
                 </header>

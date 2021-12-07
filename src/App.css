@@ -44,7 +44,7 @@ body {
 
 .wrapperClock {
   position: relative;
-  width: clamp(25rem, 50%, 30rem);
+  width: clamp(25rem,50%,30rem);
   height: 40rem;
   border-radius: 20px;
   display: flex;
@@ -55,6 +55,7 @@ body {
             5px 5px 15px rgba(0,0,0,0.3),
             -5px -5px 15px rgba(255,255,255,0.1);
   transition: all 0.5s ease-out;
+  margin-inine: 20px;
 }
 
 .wrapperInside {
@@ -256,7 +257,7 @@ header
 }
 
 .seven {
-  left: 80px;
+  left: 70px;
   top: 82%;
 }
 
@@ -388,8 +389,8 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 
 .alarmsContainer {
   padding: 0 20px;
-  margin-top: 4rem;
-  height: 26rem;
+  margin-top: 1.5rem;
+  height: 25rem;
   overflow-y: auto;
 }
 
@@ -408,7 +409,7 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 .alarmUP {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  
   /*border-top: 1px solid rgba(0,0,0,0.03);*/
   border-top: 1px solid rgb(241, 228, 238);
   border-bottom: 1px solid rgb(241, 228, 238);
@@ -425,11 +426,8 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 }
 
 .alarmTime {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex: 1;
 }
-
 .alarmTime > h2 {
   text-shadow: 2px 0px 0px #f39fdc;
   text-align: center;
@@ -693,14 +691,13 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 }
 
 .alarmTification {
-  position: absolute;
-  width: 70%;
-  left: 15%;
-  top: 10%;
+  display: grid;
+  place-items: center;
+  margin-top: 20px;
+  padding: 7px;
+  border-radius: 5px;
   background-color: #f8ceec;
   background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-  color: #fff;
-  padding: 7px 5px;
   transition: 0.5s ease-out;
 }
 
@@ -719,8 +716,9 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 .alarmTification > p {
   display: block;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: center;
+  color: #fff;
 }
 
 .timerStats > span {
@@ -729,12 +727,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 }
 
 @media (max-width: 768px) {
-
-  .alarmTification {
-    top: 9%;
-    left: 15%;
-
-  }
 
   .alarmTification > p {
     font-size: 1rem;
@@ -774,12 +766,4 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   }
 
 }
-
-@media (max-width: 400px) {
-  .alarmTification {
-    top: 11%;
-    left: 17%;
-  }
-}
-
 

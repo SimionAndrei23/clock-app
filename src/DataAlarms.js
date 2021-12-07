@@ -7,9 +7,14 @@ const DataAlarms = ({index,alarmDate,checked,setChecked,setIsAlarmChecked, setSt
 
     const [alarmStats, setAlarmStats] = useState('')
 
-    const finalHours = alarmStats?.hour >= 1 ? 24 - alarmStats?.hour + ' hours, ' : ''
+    const checkHours = 24 - alarmStats?.hour == 1 ? ' hour ' : ' hours '
+    console.log(24 - alarmStats?.hour);
 
-    const finalMinutes = alarmStats?.minute - 6 + ' minutes.'
+    const finalHours = alarmStats?.hour >= 1 ? 24 - alarmStats?.hour + checkHours : ''
+
+    const checkMinutes = alarmStats?.minute - 6 == 1 ? ' minute. ' : ' minutes. '
+
+    const finalMinutes = alarmStats?.minute - 6 >= 1 ? alarmStats?.minute - 6 + checkMinutes : ''
 
     const setTime =  finalHours + finalMinutes
 
@@ -28,17 +33,6 @@ const DataAlarms = ({index,alarmDate,checked,setChecked,setIsAlarmChecked, setSt
     const currentData = new Date();
 
     const diffInMilliseconds = Math.abs(new Date(currentData) - new Date(alarmDate));
-
-    /*function formatAMPM(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        minutes = minutes < 10 ? '0'+ minutes : minutes;
-        var strTime = hours + ':' + minutes + ' ' + ampm;
-        return strTime;
-    }*/
       
     const convertToMS = (milliseconds) => {
         let day, hour, minute, seconds;

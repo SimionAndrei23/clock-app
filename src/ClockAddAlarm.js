@@ -54,9 +54,9 @@ const ClockAddAlarm = () => {
     }
 
     const setButton = () => {
-        setDoneButton(true)
+        setDoneButton(!doneButton)
         setAddAlarm(false)
-       setDataAlarms(data => [...data, {
+        setDataAlarms(data => [...data, {
            date: finalSelectedDate
        }])                                                                                                                                                                                                                                                                                                                                                                                               
     }
@@ -130,7 +130,7 @@ const ClockAddAlarm = () => {
                     </div>
                 </header>
                 <div className = {`alarmTification ${isAlarmChecked ? 'active' : 'inactive'}`}>
-                    <p>Your alarm will go off in {statsAlarm}</p>
+                    <p> Your alarm will go off in {statsAlarm} </p>
                 </div>
                 <div className = 'alarmsContainer'>
                     <>
