@@ -4,32 +4,19 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-html,body {
+body {
   overflow-x: hidden;
 }
-
-body {
-  
-  font-family: 'Corinthia', cursive;
-  font-family: 'Dancing Script', cursive;
-
-}
-
-
 .App {
   position: relative;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  background: url('../src/files/timeBackground.jpg');
-  background-size: cover;
-  background-position: center;
-}
+  background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 
+}
 .App::before {
   content: '';
   position: absolute;
@@ -37,39 +24,50 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #f0ecfc;
-  background-image: linear-gradient(315deg, #f0ecfc 0%, #c797eb 74%);
-  mix-blend-mode: multiply;
+  background-color: #f5e3e6;
+  background-image: linear-gradient(315deg, #d9e4f5 60%, #f5e3e6 100%);
+  clip-path: circle(12% at 5% 5%);
+}
+
+.App::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d9e4f5;
+  background-image: linear-gradient(135deg, #d9e4f5 80%, #f5e3e6 100%);
+  clip-path: circle(12% at 95% 90%);
 }
 
 .wrapperClock {
   position: relative;
   width: clamp(25rem,50%,30rem);
   height: 40rem;
-  border-radius: 20px;
+  border-radius: 1.25rem;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2),
-             inset -5px -5px 15px rgba(255,255,255,0.1),
-            5px 5px 15px rgba(0,0,0,0.3),
-            -5px -5px 15px rgba(255,255,255,0.1);
+             inset -5px -5px 10px rgba(255,255,255,0.1),
+            5px 5px 10px rgba(0,0,0,0.3),
+            -5px -5px 10px rgba(255,255,255,0.1);
   transition: all 0.5s ease-out;
-  margin-inine: 20px;
+  margin: 0 1.25rem;
+  z-index: 1000;
 }
-
 .wrapperInside {
   position: absolute;
-  inset: 20px;
+  inset: 1.25rem;
   background-color: #f9fcff;
-  background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
-  padding: 12px;
+  background-image: radial-gradient(315deg, #f9fcff 0%, #dee4ea 74%);
+  padding: .75rem;
   z-index: 100;
-  border-radius: 15px;
-  transition: 0.5s ease-in-out;
+  border-radius: 1rem;
   animation: animateIN 1s ease-in-out;
+  z-index: 1000;
 }
-
 @keyframes  animateIN {
   from {
     opacity: 0;
@@ -81,6 +79,17 @@ body {
   }
 }
 
+.wrapperInsideCircle:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: circle(17% at -10% 25%);
+  background-color:rgba(0,0,0,0.01);
+  z-index: -1;
+}
 
 .wrapperInside::before {
   content: '';
@@ -91,13 +100,46 @@ body {
   height: 100%;
   clip-path: circle(60% at 50% 125%);
   background-color: rgba(0,0,0,0.01);
+  z-index: -1;
+}
+.boxContent {
+  position: absolute;
+  z-index: -1;
+  filter: blur(150px);
 }
 
+.box1 {
+  top: 50%;
+  left: 10%;
+  width: 10rem;
+  height: 10rem;
+  background-color: #d8dede;
+  background-image: linear-gradient(315deg, #d8dede 0%, #e5bdf6 74%);
+}
+
+.box2 {
+  top: 50%;
+  right: 10%;
+  width: 10rem;
+  height: 10rem;
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+}
+
+.box3 {
+  top: 50%;
+  right: 10%;
+  width: 10rem;
+  height: 10rem;
+  background-color: #ddcad9;
+  background-image: linear-gradient(315deg, #ddcad9 0%, #d1b1cb 74%);
+}
 header
 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 3.5rem;
 }
 
 .logoWrapper
@@ -106,7 +148,6 @@ header
   width: 3rem;
   height: 3rem;
 }
-
 .logoWrapper > img {
   position: absolute;
   top: 0;
@@ -115,7 +156,6 @@ header
   height: 100%;
   object-fit: cover;
 }
-
 .plusWrapper {
   position: relative;
   display: flex;
@@ -125,10 +165,7 @@ header
   height: 2rem;
   border-radius: 50%;
   background: #EEF0F4;
-  box-shadow: inset 9.91px 9.91px 15px #E8EAEE, inset -9.91px -9.91px 15px #F4F6FA;
-
 }
-
 .clockWrapper
 {
   position: relative;
@@ -138,7 +175,6 @@ header
   margin-inline: auto;
   margin-block: 30px;
 }
-
 .clock {
   display: flex;
   align-items: center;
@@ -150,20 +186,18 @@ header
   height: 15rem;
   animation: animationMove 5s ease-in-out infinite;
 }
-
 .clock::before {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-  width: 10px;
-  height: 10px;
+  width: .6rem;
+  height: .6rem;
   border-radius: 50%;
   background-color: lightgray;
   z-index: 1000;
 }
-
 @keyframes animationMove {
   0%, 100% {
     transform: translateY(10px);
@@ -173,129 +207,103 @@ header
     transform: translateY(-10px);
   }
 }
-
-
 .hour_hand {
   position: absolute;
-  width: 6px;
-  height: 60px;
+  width: .3rem;
+  height: 3.75rem;
   background-color: #D9AFD9;
   background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
-  top: 60px;
+  top: 3.75rem;
   border-radius: 10px 10px 0 0;
   transform-origin: bottom;
 }
-
 .minute_hand {
   position: absolute;
-  width: 4px;
-  height: 70px;
+  width: .25rem;
+  height: 4.5rem;
   background-color: #FAACA8;
   background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
-  top: 48px;
-  border-radius: 10px 10px 0 0;
+  top: 3rem;
+  border-radius: .6rem .6px 0 0;
   transform-origin: bottom;
 }
-
 .second_hand {
   position: absolute;
-  width: 2px;
-  height: 80px;
+  width: .1rem;
+  height: 5rem;
   background-color: #8BC6EC;
   background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-  top: 40px;
-  border-radius: 10px 10px 0 0;
+  top: 2.5rem;
+  border-radius: .6rem .6rem 0 0;
   transform-origin: bottom;
 }
-
 .clock span {
   position: absolute;
-  font-family: 'Corinthia', cursive;
-  font-family: 'Dancing Script', cursive;
   font-weight: 600;
-  
 }
-
 .twelve {
-  top: 10px;
-  left: 46%;
+  top: 5%;
+  left: 48%;
 }
-
 .one {
   top: 10%;
   right: 26%;
 }
-
 .eleven {
   top: 10%;
   left: 26%;
 }
-
 .two {
   top: 25%;
   right: 10%;
 }
-
 .three {
-  right: 10px;
+  right: 5%;
   top: 46%;
 }
-
 .four {
-  right: 30px;
-  top: 67%;
+  right: 12%;
+  top: 68%;
 }
-
 .five {
-  right: 65px;
+  right: 27%;
   top: 82%;
 }
-
 .six {
-  bottom: 10px;
-  left: 50%;
+  bottom: 5%;
+  left: 49%;
 }
-
 .seven {
-  left: 70px;
-  top: 82%;
+  left: 30%;
+  top: 80%;
 }
-
 .eight {
-  left: 30px;
+  left: 12%;
   top: 67%;
 }
-
 .nine {
-  left: 10px;
+  left: 5%;
   top: 46%;
 }
-
 .ten {
   top: 25%;
   left: 10%;
 }
-
 .time {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
 }
-
-.time h3,
-.time p {
+.time h3 {
   display: block;
   font-weight: 700;
   font-family: 'Corinthia', cursive;
   font-family: 'Dancing Script', cursive;
-}
-
-.time p {
-  margin-top: 20px;
-  font-size: 1.2rem;
+  text-shadow: 2px 3px 0px #f39fdc;
+  margin-top: 1rem;
+  color: rgba(0,0,0,0.7);
 }
 
 .bottomTabs {
@@ -308,18 +316,17 @@ header
   justify-content: space-evenly;
   align-items: center;
   background-color: #d9e4f5;
-background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
-  border-radius: 0 0 15px 15px;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  border-radius: 0 0 1rem 1rem;
 }
-
-
 .wrapperIcon {
   position: relative;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background-color: #E6E8EB;
-  transition: all 1s ease-out;
+  /* background-color: #E6E8EB; */
+  background-color: rgba(0,0,0,0.03);
+  transition: 1s ease-out;
   transform: translateY(12px);
   cursor: pointer;
 }
@@ -333,7 +340,7 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   position: absolute;
   display: grid;
   place-items: center;
-  inset: 5px;
+  inset: .3rem;
   border-radius: 50%;
   background-color: #fff;
 }
@@ -363,12 +370,12 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   transition-delay: 0.2s;
 }
 
-
 /* Add Alarm Clock */
 
 .alarmSet p {
   text-align: center;
-  font-size: 1.5rem;
+  margin: 0 .5rem;
+  font-size: clamp(.5rem, .5vw + 1rem, 1.5rem);
   background-color: #9ab5e1;
   background-image: linear-gradient(315deg, #9ab5e1 0%, #f39fdc 74%);  
   background-clip: text;
@@ -378,42 +385,38 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 
 .quoteAlarm p {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(.5rem, .5vw + 1rem, 1.5rem);
   background-color: #9ab5e1;
   background-image: linear-gradient(315deg, #9ab5e1 50%, #f39fdc 74%);  
   background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
-  
+  margin-top: .5rem;
+  margin-left: .5rem;
 }
-
 .alarmsContainer {
-  padding: 0 20px;
+  padding: 0 1.25rem;
   margin-top: 1.5rem;
-  height: 25rem;
+  height: 25.5rem;
   overflow-y: auto;
 }
-
 .alarmsContainer::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
-
 .alarmsContainer {
-  -ms-overflow-style: none;  /* 
-  IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
 } 
-
-
 .alarmUP {
+  position: relative;
   display: flex;
   align-items: center;
-  
-  /*border-top: 1px solid rgba(0,0,0,0.03);*/
+  justify-content: space-between;
   border-top: 1px solid rgb(241, 228, 238);
   border-bottom: 1px solid rgb(241, 228, 238);
-  padding: 12px 0;
+  padding: 1.2rem 0;
+  cursor: pointer;
 }
 
 .alarmNotification span {
@@ -424,22 +427,68 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-.alarmTime {
-  flex: 1;
-}
 .alarmTime > h2 {
-  text-shadow: 2px 0px 0px #f39fdc;
-  text-align: center;
+  text-shadow: 2.5px 2px 0px #f39fdc;
   width: 8rem;
+  text-align: center;
 }
-
 .alarmTime > p {
   color: #000;
   opacity: 0.5;
 }
+.alarmDisplay {
+  position: absolute;
+  top: 3rem;
+  left: 1rem;
+}
 
-.check {
+
+.alarmDisplay > p {
+  display: inline;
+  background-color: #a88beb;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.deleteTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 25%;
+  top: 40%;
+  padding: .3rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  transition-delay: 100ms;
+}
+
+.deleteTime > span:nth-child(1) {
+  position: absolute;
+  width: 100%;
+  height: .1rem;
+  transform: rotate(45deg);
+  background-color: #d387ab;
+  background-image: linear-gradient(315deg, #d387ab 0%, #b279a7 74%);
+}
+
+.deleteTime > span:nth-child(2) {
+  position: absolute;
+  width: 100%;
+  height: .1rem;
+  background-color: #d387ab;
+  background-image: linear-gradient(135deg, #d387ab 0%, #b279a7 74%);
+  transform: rotate(-45deg);
+}
+.alarmUP:hover .deleteTime {
+  opacity: 1;
+}
+.check{
   position: relative;
   display: block;
   width: 4rem;
@@ -451,6 +500,19 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   overflow:hidden;
 }
 
+.check1 {
+  position: relative;
+  display: block;
+  width: 4rem;
+  height: 2rem;
+  border-radius: 50px;
+  background-color: #f8ceec;
+  background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+  box-shadow: 0px 10px 15px #f8ceec;
+  transition: 0.5s ease-out;
+  cursor: pointer;
+  overflow:hidden;
+}
 .check::before {
   content: '';
   position: absolute;
@@ -464,9 +526,17 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
   -webkit-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
   -moz-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  animation: animationBefore2 forwards .5s ease-out;
 }
-
-.check::after {
+@keyframes animationBefore2 {
+  0% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.check1::after {
   content: '';
   position: absolute;
   top: 4px;
@@ -474,36 +544,32 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 50%;
-  background-color: lightgray;
+  background-color: #fff;
   transition: 0.5s ease-out;
-  transform: translateX(50px);
-  
+  transform: translateX(0px);
+  box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -webkit-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  -moz-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+  animation: animationAfter forwards .5s ease-out;
 }
-
+@keyframes animationAfter {
+  0% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 #checkInput {
   -webkit-appearance: none;
   display: none;
 }
-
-
-#checkInput:checked ~ .check {
-  background-color: #f8ceec;
-  background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-  box-shadow: 0px 10px 15px #f8ceec;
-}
-
-#checkInput:checked ~ .check::before {
+#checkInput:checked ~ .check::before{
   transform: translateX(-50px);
 }
-
-#checkInput:checked ~ .check::after {
-  transform: translateX(0);
-  background-color: #fff;
-  box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
-  -webkit-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
-  -moz-box-shadow: -12px 9px 25px -1px rgba(0,0,0,0.41);
+#checkInput:checked ~ .check1::after {
+  transform: translateX(50px);
 }
-
 .alarmPopUPActive
 {
   position: absolute;
@@ -516,7 +582,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   z-index: 1000;
   transition: all 0.8s ease-in-out;
 }
-
 .alarmWrapper
 {
   display: inline-block;
@@ -526,7 +591,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   transform: scale(0);
   opacity: 0;
 }
-
 .alarmWrapper.active {
   transform: scale(1);
   opacity: 1;
@@ -536,31 +600,131 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
 {
   display: none;
 }
-
 .containerClock {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-
 .doneButton {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  bottom: -45px;
+  gap: .6rem;
+  bottom: -2.8rem;
   background-color: #fff;
   width: 100%;
   height: 3rem;
+  z-index: 2;
+  cursor: pointer;
+  overflow: hidden;
 }
 
+.doneButton::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.05);
+  clip-path: circle(50% at 50% -100%);
+  z-index: -1;
+}
 .doneButton p {
-  cursor: pointer;
-  background-color: #f39fdc; 
-  background-clip: text;
+  display: inline;
+  background-color: #e899dc;
+  background-image: linear-gradient(315deg, #e899dc 0%, #d387ab 74%);
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  opacity: 0.7;
   font-size: 1.2rem;
+  z-index: 100;
+}
+
+.alarmIsON {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #d9d9d9;
+  background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+}
+
+.alarmIsON::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.03);
+  clip-path: circle(50% at 50% -10%);
+}
+
+.alarmIsON::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.03);
+  clip-path: circle(50% at 50% 110%);
+}
+
+.containerAlarmON {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 1rem 2rem;
+  width: 80%;
+  height: 70%;
+  border-radius: 2rem;
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.08);
+  z-index: 1000000;
+}
+
+.containerAlarmON > button {
+  display: block;
+  margin-inline: auto;
+  text-align: center;
+  width: 50%;
+  padding: .5rem;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s ease-out;
+  background-image: linear-gradient(to right, #ddd6f3 0%, #faaca8  51%, #ddd6f3  100%);
+  background-size: 200% auto;
+  color: white;            
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+}
+
+.containerAlarmON > button:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.alarmDateAudio
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.alarmIsOFF {
+  display: none;
 }
 
 .checkIcon {
@@ -568,14 +732,12 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   width: 1rem;
   height: 1rem;
 }
-
 .checkIcon > img {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 
 /* Stopwatch */
 
@@ -597,14 +759,12 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   height: 80%;
   z-index: -1;
 }
-
 .containerBox {
   position: absolute;
   width: 7.5rem;
   height: 7.5rem;
   background-color: rgb(0,0,0,0.02);
 }
-
 .container1 {
   display: grid;
   place-items: center;
@@ -613,7 +773,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   animation: animationContainer1 10s ease-in-out infinite;
   z-index: -1;
 }
-
 .container1 > img,
 .container2 > img {
   display: inline-block;
@@ -622,7 +781,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   text-align: center;
   opacity: 0.1;
 }
-
 @keyframes animationContainer1 {
   0%,100% {
     transform: translateY(-20px);
@@ -631,7 +789,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
     transform: translateY(20px);
   }
 }
-
 .container2 {
   display: grid;
   place-items: center;
@@ -639,7 +796,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   right: 0;
   animation: animationContainer2 10s ease-in-out infinite;
 }
-
 @keyframes animationContainer2 {
   0%,100% {
     transform: translateY(20px);
@@ -648,15 +804,12 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
     transform: translateY(-20px);
   }
 }
-
-
 .buttonsTimer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
 }
-
 .buttonsTimer > button {
   display: inline-block;
   border: none;
@@ -667,52 +820,46 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   cursor: pointer;
   transition: 0.5s ease-out;
 }
-
 .buttonsTimer > button:nth-child(1) {
   background-color: #d387ab;
   background-image: linear-gradient(315deg, #d387ab 0%, #b279a7 74%);
 }
-
 .buttonsTimer > button:nth-child(1):hover {
   background-color: #000000;
   background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
   color: #d387ab;
 }
-
 .buttonsTimer > button:nth-child(2) {
   background-color: #9e8fb2;
   background-image: linear-gradient(315deg, #9e8fb2 0%, #a7acd9 74%);
 }
-
 .buttonsTimer > button:nth-child(2):hover {
   background-color: #000000;
   background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
   color: #9e8fb2;
 }
-
 .alarmTification {
-  display: grid;
-  place-items: center;
-  margin-top: 20px;
-  padding: 7px;
+  position: absolute;
+  left: 5%;
+  top: 10%;
+  width: 90%;
+  transform: translateX(-50%);
+  padding: .5rem;
   border-radius: 5px;
   background-color: #f8ceec;
   background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
   transition: 0.5s ease-out;
 }
-
 .alarmTification.active {
 
   transform: scale(1);
   opacity: 1;
 
 }
-
 .alarmTification.inactive {
   transform: scale(0);
   opacity: 0;
 }
-
 .alarmTification > p {
   display: block;
   font-weight: 500;
@@ -725,29 +872,76 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
   font-weight: 700;
   font-size: 2rem;
 }
-
 @media (max-width: 768px) {
 
+  .clock {
+    width: 13rem;
+    height: 13rem;
+  }
+
+  .second_hand {
+    top: 2.5rem;
+    height: 4rem;
+  }
+
+  .minute_hand {
+    top: 2.1rem;
+    left: 6.5rem;
+  }
+
+  .hour_hand {
+    top: 3.5rem;
+    height: 3rem;
+  }
+
+  header {
+    margin-bottom: 4.5rem;
+  }
+
+  .deleteTime {
+    right: 40%;
+  }
+
+  .check,
+  .check1 {
+    width: 3.5rem;
+  }
+
+  .check::before,
+  .check::after {
+    top: .3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .check1::after,
+  .check::after {
+    top: .3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .alarmTification {
+    top: 12%;
+  }
   .alarmTification > p {
     font-size: 1rem;
   }
-
-  .alarmSet p,
-  .quoteAlarm p {
-    font-size: 1.3rem;
-  }
-
   .alarmTime > h2 {
     font-size: 1.3rem;
+    text-align: start;
   }
-
+  .time h3 {
+    margin-top: 2rem;
+  }
+  .alarmDisplay {
+    left: .2rem;
+  }
   .containerBox {
     position: absolute;
     width: 6.5rem;
     height: 6.5rem;
     background-color: rgb(0,0,0,0.02);
   }
-
   .container1 {
     display: grid;
     place-items: center;
@@ -756,7 +950,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
     animation: animationContainer1 10s ease-in-out infinite;
     z-index: -1;
   }
-
   .container2 {
     display: grid;
     place-items: center;
@@ -764,6 +957,14 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
     right: 0;
     animation: animationContainer2 10s ease-in-out infinite;
   }
+}
 
+@media only screen and (min-width: 320px) and (max-width: 450px) {
+  .alarmTification {
+    top: 10%;
+  }
+  .alarmTification > p{
+    font-size: 1rem;
+  }
 }
 

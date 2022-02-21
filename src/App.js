@@ -1,27 +1,21 @@
 
 import './App.css';
-import ClockAccess from './ClockAccess';
-import ClockAddAlarm from './ClockAddAlarm';
-import ClockTimer from './ClockTimer';
-import {BrowserRouter as Router,Switch,Route} from "react-router-dom";
+import ClockAccess from './components/ClockAccess';
+import ClockAddAlarm from './components/ClockAddAlarm';
+import ClockTimer from './components/ClockTimer';
+import {BrowserRouter,Routes,Route} from "react-router-dom";
 
 function App() {
   return (
-   <Router>
+   <BrowserRouter>
       <div className="App">
-        <Switch>
-          <Route exact path = '/'>
-            <ClockAccess />
-          </Route>
-          <Route exact path = '/addAlarm'>
-            <ClockAddAlarm />
-          </Route>
-          <Route exact path = '/clockTimer'>
-            <ClockTimer />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path = '/' element = {<ClockAccess />} />
+          <Route path = '/addAlarm' element = {<ClockAddAlarm />} />
+          <Route path = '/clockTimer' element = {<ClockTimer />} />
+        </Routes>
     </div>
-   </Router>
+   </BrowserRouter>
   );
 }
 

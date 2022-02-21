@@ -1,18 +1,13 @@
 import React, { useEffect, useState} from 'react'
 import Lottie from 'react-lottie';
-import animationData from './files/clock-animation.json';
-import { dataTabs } from './sampleData/data'
-import { useHistory } from 'react-router-dom';
+import animationData from '../files/clock-animation.json';
+import { dataTabs } from '../sampleData/data'
+import { useNavigate } from 'react-router-dom';
 
 const ClockAccess = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const keyAPI = '67db815d4444a145f0b3c788d2156269';
-
-    const [latitude, setLatitude] = useState('')
-    const [longitude, setLongitude] = useState('')
-    const [location, setLocation] = useState();
     const [activeTab, setActiveTab] = useState('Access')
     const [defaultClock, setDefaultClock] = useState({ time: new Date() })
 
@@ -39,59 +34,47 @@ const ClockAccess = () => {
     
        }
 
+       const date = new Date();
+
+       const time = formatTime(date)
+
        const tabHandler = (name) => {
 
         setActiveTab(name)
     
         if(name === 'Access') {
     
-            history.push('/')
+            navigate('/')
     
         }
     
         else if(name === 'AddAlarm') {
     
-            history.push('/addAlarm')
+            navigate('/addAlarm')
         }
     
         else if (name === 'Timer') {
-            history.push('/clockTimer')
+            navigate('/clockTimer')
         }
     
        }
     
-       const date = new Date();
-    
-       const time = formatTime(date)
-
    useEffect(() => {
+
     let timeId = setInterval(() => {
         setDefaultClock({
             time: new Date()
         })
-    })
+    },1000)
     return () => clearInterval(timeId)
-   },1000)
-
-   useEffect(() => {
-       if(navigator.geolocation) {
-              return navigator.geolocation.getCurrentPosition((position) => {
-               setLatitude(position.coords.latitude);
-               setLongitude(position.coords.longitude);
-           })
-       }
    },[])
-
-   useEffect(() => {
-        return fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=` + `${keyAPI}`)
-        .then(result => result.json())
-        .then(data => setLocation(data))
-   },[latitude,longitude])
-   
    
     return (
             <div className="wrapperClock">
-                <div className="wrapperInside">
+                <div className="wrapperInside wrapperInsideCircle">
+                    <div className="boxContent box1"></div>
+                    <div className="boxContent box2"></div>
+                    <div className="boxContent box3"></div>
                      <header>
                         <div className = 'lottieWrapper'>  
                             <Lottie
@@ -100,7 +83,7 @@ const ClockAccess = () => {
                                 width = {40} 
                             />
                         </div> 
-                       <div className = 'quoteAlarm'><p> Time is precious, hurry up! </p></div>
+                       <div className = 'quoteAlarm'><p>Time is precious, hurry up!</p></div>
                        <div></div>
                      </header>
                      <div className="clockWrapper">
@@ -124,7 +107,6 @@ const ClockAccess = () => {
                      </div>
                         <div className = 'time'>
                             <h3>{time}</h3>
-                            <p>{location?.timezone}</p>
                         </div>
                         <div className = 'bottomTabs'>
                            <>
